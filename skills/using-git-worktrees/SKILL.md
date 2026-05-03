@@ -100,7 +100,9 @@ cd "$path"
 
 ### 3. Run Project Setup
 
-Auto-detect and run appropriate setup:
+**DeepFlow:** The Django backend runs entirely in Kubernetes. Do **not** run `pip install` or `poetry install` locally — there is no local Django environment. Skip to Step 4.
+
+For other project types, auto-detect and run appropriate setup:
 
 ```bash
 # Node.js
@@ -109,7 +111,7 @@ if [ -f package.json ]; then npm install; fi
 # Rust
 if [ -f Cargo.toml ]; then cargo build; fi
 
-# Python
+# Python (non-DeepFlow)
 if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 if [ -f pyproject.toml ]; then poetry install; fi
 
@@ -119,7 +121,15 @@ if [ -f go.mod ]; then go mod download; fi
 
 ### 4. Verify Clean Baseline
 
-Run tests to ensure worktree starts clean:
+**DeepFlow:** Tests run in Kubernetes and take several minutes. Skip the baseline test run — it is impractical before each worktree. Instead, verify lint passes locally:
+
+```bash
+pre-commit run --all-files
+```
+
+If lint fails, fix before proceeding.
+
+For other project types, run tests to ensure worktree starts clean:
 
 ```bash
 # Examples - use project-appropriate command
@@ -131,7 +141,7 @@ go test ./...
 
 **If tests fail:** Report failures, ask whether to proceed or investigate.
 
-**If tests pass:** Report ready.
+**If lint/tests pass:** Report ready.
 
 ### 5. Report Location
 

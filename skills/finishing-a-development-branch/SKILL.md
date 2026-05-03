@@ -15,27 +15,40 @@ Guide completion of development work by presenting clear options and handling ch
 
 ## The Process
 
-### Step 1: Verify Tests
+### Step 1: Verify Tests and Quality Gates
 
-**Before presenting options, verify tests pass:**
+**Before presenting options, run all three checks in order:**
 
+**1a. Lint:**
 ```bash
-# Run project's test suite
-npm test / cargo test / pytest / go test ./...
+pre-commit run --all-files
 ```
+Fix any ruff or prettier failures before continuing.
 
-**If tests fail:**
+**1b. Migration check:**
+```bash
+python manage.py makemigrations --check
 ```
-Tests failing (<N> failures). Must fix before completing:
+If this outputs pending migrations, create them and commit before continuing.
+
+**1c. Test suite** (runs in Kubernetes — takes several minutes):
+```bash
+bash kubeops.sh test
+```
+Use `run_in_background: true`.
+
+**If any check fails:**
+```
+Cannot proceed — <lint|migration|test> check failed:
 
 [Show failures]
 
-Cannot proceed with merge/PR until tests pass.
+Fix before completing.
 ```
 
 Stop. Don't proceed to Step 2.
 
-**If tests pass:** Continue to Step 2.
+**If all pass:** Continue to Step 2.
 
 ### Step 2: Determine Base Branch
 
@@ -97,8 +110,23 @@ gh pr create --title "<title>" --body "$(cat <<'EOF'
 ## Summary
 <2-3 bullets of what changed>
 
+## Migrations
+- [ ] No new migrations
+- [ ] New migrations included and reviewed
+
+## API Changes
+- [ ] No API changes
+- [ ] API changes are backwards-compatible
+- [ ] Breaking API changes — documented and coordinated
+
+## Kubernetes / Config Changes
+- [ ] No manifest or config changes
+- [ ] Changes to Helm values / K8s manifests included
+
 ## Test Plan
-- [ ] <verification steps>
+- [ ] `bash kubeops.sh test` passes
+- [ ] `pre-commit run --all-files` clean
+- [ ] `python manage.py makemigrations --check` no pending migrations
 EOF
 )"
 ```
@@ -160,9 +188,9 @@ git worktree remove <worktree-path>
 
 ## Common Mistakes
 
-**Skipping test verification**
-- **Problem:** Merge broken code, create failing PR
-- **Fix:** Always verify tests before offering options
+**Skipping quality gate verification**
+- **Problem:** Merge broken code, create failing PR with lint errors or missing migrations
+- **Fix:** Always run pre-commit, makemigrations --check, and kubeops.sh test before offering options
 
 **Open-ended questions**
 - **Problem:** "What should I do next?" → ambiguous

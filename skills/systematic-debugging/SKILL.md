@@ -86,7 +86,29 @@ You MUST complete each phase before proceeding to the next.
    THEN investigate that specific component
    ```
 
-   **Example (multi-layer system):**
+   **DeepFlow diagnostic layers:**
+   ```bash
+   # Layer 1: Pod status
+   kubectl -n ${NAMESPACE} get pods
+   kubectl -n ${NAMESPACE} describe pod <pod-name>
+
+   # Layer 2: Application logs
+   kubectl -n ${NAMESPACE} logs <pod-name> --tail=100
+   kubectl -n ${NAMESPACE} logs <pod-name> -c <container> --previous  # crashed container
+
+   # Layer 3: Celery task state
+   kubectl -n ${NAMESPACE} exec <worker-pod> -- celery -A aipaas2 inspect active
+   kubectl -n ${NAMESPACE} exec <worker-pod> -- celery -A aipaas2 inspect reserved
+
+   # Layer 4: Django ORM / DB query
+   # Add to handler: import logging; logger.debug("query: %s", queryset.query)
+   kubectl -n ${NAMESPACE} logs <backend-pod> | grep "query:"
+
+   # Layer 5: Kong gateway
+   kubectl -n ${NAMESPACE} logs <kong-pod> | grep <endpoint-path>
+   ```
+
+   **General example (multi-layer system):**
    ```bash
    # Layer 1: Workflow
    echo "=== Secrets available in workflow: ==="
@@ -177,6 +199,7 @@ You MUST complete each phase before proceeding to the next.
    - One-off test script if no framework
    - MUST have before fixing
    - Use the `superpowers:test-driven-development` skill for writing proper failing tests
+   - **DeepFlow:** Run with `bash kubeops.sh test TestClassName` (use `run_in_background: true`)
 
 2. **Implement Single Fix**
    - Address the root cause identified

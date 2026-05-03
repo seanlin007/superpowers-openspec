@@ -41,9 +41,9 @@ Skip any step = lying, not verifying
 
 | Claim | Requires | Not Sufficient |
 |-------|----------|----------------|
-| Tests pass | Test command output: 0 failures | Previous run, "should pass" |
-| Linter clean | Linter output: 0 errors | Partial check, extrapolation |
-| Build succeeds | Build command: exit 0 | Linter passing, logs look good |
+| Tests pass | `bash kubeops.sh test` output: 0 failures | Previous run, "should pass" |
+| Linter clean | `pre-commit run --all-files` output: 0 errors | Partial check, extrapolation |
+| No missing migrations | `python manage.py makemigrations --check` exits 0 | Assumed no model changes |
 | Bug fixed | Test original symptom: passes | Code changed, assumed fixed |
 | Regression test works | Red-green cycle verified | Test passes once |
 | Agent completed | VCS diff shows changes | Agent reports "success" |
@@ -77,8 +77,20 @@ Skip any step = lying, not verifying
 
 **Tests:**
 ```
-✅ [Run test command] [See: 34/34 pass] "All tests pass"
+✅ [bash kubeops.sh test] [See: 34/34 pass] "All tests pass"
 ❌ "Should pass now" / "Looks correct"
+```
+
+**Lint:**
+```
+✅ [pre-commit run --all-files] [See: Passed] "Lint clean"
+❌ "I didn't change anything that ruff would flag"
+```
+
+**Migrations:**
+```
+✅ [python manage.py makemigrations --check] [See: No changes detected] "No missing migrations"
+❌ "I didn't change any models"
 ```
 
 **Regression tests (TDD Red-Green):**

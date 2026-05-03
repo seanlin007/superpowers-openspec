@@ -5,6 +5,26 @@ description: Use when implementing any feature or bugfix, before writing impleme
 
 # Test-Driven Development (TDD)
 
+## DeepFlow Test Environment
+
+**Tests do not run locally.** All pytest execution happens inside a Kubernetes pod with PostgreSQL, Redis, and MinIO.
+
+**Never run `pytest` directly.** Always use:
+
+```bash
+# Run all tests
+bash kubeops.sh test
+
+# Run specific test class or keyword
+option="TestClassName" bash kubeops.sh test
+```
+
+Use `run_in_background: true` — tests take several minutes. After completion, tear down the test pod with `bash kubeops.sh testreset` (ask user first).
+
+Results are reported with pass/fail count and a link to the Allure report.
+
+---
+
 ## Overview
 
 Write the test first. Watch it fail. Write minimal code to pass.
@@ -115,8 +135,10 @@ Vague name, tests mock not code
 **MANDATORY. Never skip.**
 
 ```bash
-npm test path/to/test.test.ts
+option="TestClassName" bash kubeops.sh test
 ```
+
+Run in background (`run_in_background: true`) — takes several minutes.
 
 Confirm:
 - Test fails (not errors)
@@ -170,8 +192,10 @@ Don't add features, refactor other code, or "improve" beyond the test.
 **MANDATORY.**
 
 ```bash
-npm test path/to/test.test.ts
+option="TestClassName" bash kubeops.sh test
 ```
+
+Run in background (`run_in_background: true`).
 
 Confirm:
 - Test passes
@@ -301,7 +325,7 @@ test('rejects empty email', async () => {
 
 **Verify RED**
 ```bash
-$ npm test
+$ option="TestEmailValidation" bash kubeops.sh test
 FAIL: expected 'Email required', got undefined
 ```
 
@@ -317,7 +341,7 @@ function submitForm(data: FormData) {
 
 **Verify GREEN**
 ```bash
-$ npm test
+$ option="TestEmailValidation" bash kubeops.sh test
 PASS
 ```
 

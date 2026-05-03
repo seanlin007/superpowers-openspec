@@ -18,6 +18,26 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 **Save plans to:** `docs/superpowers/plans/YYYY-MM-DD-<feature-name>.md`
 - (User preferences for plan location override this default)
 
+## DeepFlow Project Context
+
+When writing plans for DeepFlow, keep the following architecture constraints in mind.
+
+**Test execution:** Tests run in Kubernetes — never `pytest` directly. Always use `bash kubeops.sh test` or `option="TestClass" bash kubeops.sh test`. Plans must reflect this in every verification step.
+
+**Backend structure:** Django monolith at `backend/src/`. Business logic lives in `handler.py` files (e.g., `MVCHandler`, `AmsDBOp`), not views. Views delegate to handlers; handlers call DB-op classes.
+
+**Key Django apps:** `workspaces`, `fms` (file storage), `mvc` (model registry), `ams` (API serving), `cms` (containers), `accounts`, `sso`, `automl`, `model_garden`, `model_health`.
+
+**RBAC:** Three view base classes — `ValidUserView`, `ValidWorkspaceUserView`, `AdminUserView`. Feature permissions declared in `libs/Constants.py`.
+
+**Async:** Celery tasks routed to named queues defined in `aipaas2/celery.py`.
+
+**Linting:** `ruff` (line-length 100, LF endings) + `prettier` (YAML only). Run `pre-commit run --all-files` before committing. Never use `autopep8` or `black`.
+
+**Frontend:** Nuxt 2 / Vue 2 / Vuetify at `frontend/`. Changes here don't require Kubernetes testing.
+
+---
+
 ## Scope Check
 
 If the spec covers multiple independent subsystems, it should have been broken into sub-project specs during brainstorming. If it wasn't, suggest breaking this into separate plans — one per subsystem. Each plan should produce working, testable software on its own.
