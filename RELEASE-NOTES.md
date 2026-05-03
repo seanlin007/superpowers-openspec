@@ -1,8 +1,34 @@
 # Superpowers Release Notes
 
-> This fork tracks upstream [obra/superpowers](https://github.com/obra/superpowers). Fork-specific changes are prefixed with **[openspec]**.
+> This fork tracks upstream [obra/superpowers](https://github.com/obra/superpowers).
+> - **`main` branch** changes are prefixed with **[openspec]**
+> - **`deepflow` branch** changes are prefixed with **[deepflow]**
 
-## v5.0.7-openspec.1 (2026-05-03)
+## deepflow branch — v5.0.7-openspec.1 (2026-05-03)
+
+### [deepflow] DeepFlow Project Customizations
+
+Project-specific overlay on top of `main`. Includes all OpenSpec changes plus:
+
+**Modified skills:**
+- `test-driven-development` — override test execution to `bash kubeops.sh test TestClassName` (tests run in Kubernetes, never pytest locally); all RED/GREEN verify steps updated
+- `writing-plans` — DeepFlow architecture context added: handler pattern, Django apps, RBAC, Celery queues, linting rules
+- `finishing-a-development-branch` — quality gates now require pre-commit (branch diff only), `python manage.py makemigrations --check`, and `bash kubeops.sh test` before offering merge/PR options; PR template updated with migration, API, and K8s checklist
+- `verification-before-completion` — test/lint/build claims updated to use `kubeops.sh`, `pre-commit --from-ref`, and `makemigrations --check`
+- `using-git-worktrees` — skip local pip install and baseline test (Django env is in Kubernetes); pre-commit runs automatically on commit
+- `systematic-debugging` — added DeepFlow diagnostic layers: kubectl pod logs, Celery task inspection, Django ORM query tracing, Kong gateway logs
+
+**New skills:**
+- `deepflow-test` — run pytest suite via `bash kubeops.sh test [TestClassName]` with auto-detection of scope from changed files
+- `deepflow-deploy` — build and deploy via `bash kubeops.sh build|dev|push|...` with interactive target selection
+- `deepflow-lint` — run ruff + prettier via `pre-commit run --from-ref origin/main --to-ref HEAD`; auto-fix with ruff/prettier; `--no-verify` documented as escape hatch for pre-existing violations
+- `deepflow-pr` — create PR after all three quality gates pass; includes migration, API change, K8s manifest, and test evidence checklist
+- `deepflow-issue` — create GitHub bug or feature issue with DeepFlow standard template and affected-app checklist
+- `grill-me` — relentless one-question-at-a-time interview for stress-testing plans and designs
+
+---
+
+## main branch — v5.0.7-openspec.1 (2026-05-03)
 
 ### [openspec] OpenSpec Integration
 

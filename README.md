@@ -1,10 +1,25 @@
 # Superpowers (w/ OpenSpec Integration)
 
-> **This is a fork of [obra/superpowers](https://github.com/obra/superpowers) with OpenSpec integration added.**
->
-> **What's different:** The `writing-plans`, `executing-plans`, and `subagent-driven-development` skills now sync with [OpenSpec](https://openspec.dev) to preserve full spec traceability alongside implementation. A new `openspec` skill handles setup and archive operations.
+> **This is a fork of [obra/superpowers](https://github.com/obra/superpowers).** It adds OpenSpec spec traceability and a DeepFlow project-specific branch.
 >
 > **Prerequisite:** [`openspec` CLI](https://openspec.dev) must be installed (`npm install -g openspec`) before using the planning workflow.
+
+## Branches
+
+| Branch | Based on | Description |
+|--------|----------|-------------|
+| `main` | obra/superpowers v5.0.7 | OpenSpec integration — `writing-plans`, `executing-plans`, and `subagent-driven-development` sync specs to OpenSpec. New `openspec` skill for setup and archive. |
+| `deepflow` | `main` | All of `main` plus DeepFlow project-specific customizations — Kubernetes test execution, Django architecture context, quality gates, and project workflow skills. |
+
+Install a specific branch:
+
+```bash
+# main (OpenSpec only)
+git clone -b main https://github.com/seanlin007/superpowers.git ~/superpowers-openspec
+
+# deepflow (OpenSpec + DeepFlow customizations)
+git clone -b deepflow https://github.com/seanlin007/superpowers.git ~/superpowers-deepflow
+```
 
 ---
 
@@ -174,9 +189,28 @@ Both this fork and the original share the plugin name `superpowers`. **Do not en
 - **finishing-a-development-branch** - Merge/PR decision workflow
 - **subagent-driven-development** - Fast iteration with two-stage review (spec compliance, then code quality)
 
+**Spec Traceability** *(added in this fork)*
+- **openspec** - Initialize OpenSpec, create change proposals, and archive completed changes
+
 **Meta**
 - **writing-skills** - Create new skills following best practices (includes testing methodology)
 - **using-superpowers** - Introduction to the skills system
+
+---
+
+### DeepFlow Branch — Additional Skills
+
+*Available in the `deepflow` branch only.*
+
+**Project Workflow**
+- **deepflow-test** - Run pytest suite via `kubeops.sh` with auto-detection of test scope from changed files
+- **deepflow-deploy** - Build and deploy to Kubernetes via `kubeops.sh` with interactive target selection
+- **deepflow-lint** - Run ruff + prettier via pre-commit on branch-diff files only; auto-fix and report
+- **deepflow-pr** - Create PR after all quality gates pass (lint, migrations, tests) with DeepFlow checklist
+- **deepflow-issue** - Create GitHub bug or feature issue with DeepFlow standard template
+
+**Design**
+- **grill-me** - Relentless interview skill for stress-testing plans and designs
 
 ## Philosophy
 
