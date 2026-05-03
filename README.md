@@ -15,10 +15,10 @@ Install a specific branch:
 
 ```bash
 # main (OpenSpec only)
-git clone -b main https://github.com/seanlin007/superpowers.git ~/superpowers-openspec
+git clone -b main https://github.com/seanlin007/superpowers-openspec.git ~/superpowers-openspec
 
 # deepflow (OpenSpec + DeepFlow customizations)
-git clone -b deepflow https://github.com/seanlin007/superpowers.git ~/superpowers-deepflow
+git clone -b deepflow https://github.com/seanlin007/superpowers-openspec.git ~/superpowers-deepflow
 ```
 
 ---
@@ -61,7 +61,7 @@ Thanks!
 Clone the repo and install from local path:
 
 ```bash
-git clone https://github.com/seanlin007/superpowers.git ~/superpowers-openspec
+git clone https://github.com/seanlin007/superpowers-openspec.git ~/superpowers-openspec
 claude plugin install ~/superpowers-openspec --scope user
 ```
 
@@ -78,7 +78,7 @@ cd ~/superpowers-openspec && git pull
 Clone the repo and install from local path:
 
 ```bash
-git clone https://github.com/seanlin007/superpowers.git ~/superpowers-openspec
+git clone https://github.com/seanlin007/superpowers-openspec.git ~/superpowers-openspec
 copilot plugin install ~/superpowers-openspec
 ```
 
@@ -107,7 +107,7 @@ gemini extensions update superpowers
 Tell OpenCode:
 
 ```
-Fetch and follow instructions from https://raw.githubusercontent.com/seanlin007/superpowers/main/.opencode/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/seanlin007/superpowers-openspec/main/.opencode/INSTALL.md
 ```
 
 ### OpenAI Codex CLI
@@ -115,7 +115,7 @@ Fetch and follow instructions from https://raw.githubusercontent.com/seanlin007/
 Clone the repo and install from local path:
 
 ```bash
-git clone https://github.com/seanlin007/superpowers.git ~/superpowers-openspec
+git clone https://github.com/seanlin007/superpowers-openspec.git ~/superpowers-openspec
 ```
 
 Open the plugin interface and point it to the local path:
@@ -131,7 +131,7 @@ Select `Install from local path` and enter `~/superpowers-openspec`.
 Clone the repo locally:
 
 ```bash
-git clone https://github.com/seanlin007/superpowers.git ~/superpowers-openspec
+git clone https://github.com/seanlin007/superpowers-openspec.git ~/superpowers-openspec
 ```
 
 In Cursor Agent chat, install from local path:
