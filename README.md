@@ -75,17 +75,20 @@ cd ~/superpowers-openspec && git pull
 
 ### GitHub Copilot CLI
 
-Clone the repo and install from local path:
+Install directly from GitHub (installs the `main` branch — OpenSpec version):
 
 ```bash
-git clone https://github.com/seanlin007/superpowers-openspec.git ~/superpowers-openspec
-copilot plugin install ~/superpowers-openspec
+copilot plugin install seanlin007/superpowers-openspec
 ```
 
-To update:
+> **Note:** Direct repo installs are being deprecated by Copilot CLI. The marketplace format will be required in a future release.
+
+> **DeepFlow branch:** Branch-specific installs are not supported by Copilot CLI. To use the DeepFlow customizations, set the `deepflow` branch as your fork's default branch on GitHub, then run the install command above.
+
+To update, reinstall:
 
 ```bash
-cd ~/superpowers-openspec && git pull
+copilot plugin install seanlin007/superpowers-openspec
 ```
 
 ### Gemini CLI
@@ -93,13 +96,13 @@ cd ~/superpowers-openspec && git pull
 Install directly from GitHub:
 
 ```bash
-gemini extensions install https://github.com/seanlin007/superpowers
+gemini extensions install https://github.com/seanlin007/superpowers-openspec
 ```
 
 To update:
 
 ```bash
-gemini extensions update superpowers
+gemini extensions update superpowers-openspec
 ```
 
 ### OpenCode
