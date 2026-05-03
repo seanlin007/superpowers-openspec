@@ -1,13 +1,13 @@
 {
-  "name": "superpowers",
-  "description": "Core skills library for Claude Code: TDD, debugging, collaboration patterns, and proven techniques",
-  "version": "5.0.7",
+  "name": "superpowers-openspec",
+  "description": "Core skills library with OpenSpec integration and DeepFlow customizations — fork of obra/superpowers",
+  "version": "5.0.7-openspec.1",
   "author": {
-    "name": "Jesse Vincent",
-    "email": "jesse@fsck.com"
+    "name": "Sean Lin",
+    "email": "xupruvu@gmail.com"
   },
-  "homepage": "https://github.com/obra/superpowers",
-  "repository": "https://github.com/obra/superpowers",
+  "homepage": "https://github.com/seanlin007/superpowers",
+  "repository": "https://github.com/seanlin007/superpowers",
   "license": "MIT",
   "keywords": [
     "skills",

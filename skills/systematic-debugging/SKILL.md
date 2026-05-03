@@ -198,7 +198,7 @@ You MUST complete each phase before proceeding to the next.
    - Automated test if possible
    - One-off test script if no framework
    - MUST have before fixing
-   - Use the `superpowers:test-driven-development` skill for writing proper failing tests
+   - Use the `superpowers-openspec:test-driven-development` skill for writing proper failing tests
    - **DeepFlow:** Run with `bash kubeops.sh test TestClassName` (use `run_in_background: true`)
 
 2. **Implement Single Fix**
@@ -307,8 +307,8 @@ These techniques are part of systematic debugging and available in this director
 - **`condition-based-waiting.md`** - Replace arbitrary timeouts with condition polling
 
 **Related skills:**
-- **superpowers:test-driven-development** - For creating failing test case (Phase 4, Step 1)
-- **superpowers:verification-before-completion** - Verify fix worked before claiming success
+- **superpowers-openspec:test-driven-development** - For creating failing test case (Phase 4, Step 1)
+- **superpowers-openspec:verification-before-completion** - Verify fix worked before claiming success
 
 ## Real-World Impact
 

@@ -142,12 +142,15 @@ In Cursor Agent chat, install from local path:
 
 ---
 
-### Conflict with original superpowers
+### Coexistence with original superpowers
 
-Both this fork and the original share the plugin name `superpowers`. **Do not enable both at the same time** — skills from each would conflict. Use one of these strategies:
+This fork uses the plugin name `superpowers-openspec` (see `package.json`), which is different from the original `superpowers`. **Both can be installed and enabled at the same time** without conflict — slash commands and skills are namespaced separately:
 
-- **Replace:** uninstall the original and install this fork at user scope.
-- **Per-project override:** keep the original at user scope (disabled), install this fork at project scope for projects that need OpenSpec traceability. Project scope takes priority.
+| This fork | Original |
+|---|---|
+| `/superpowers-openspec:brainstorm` | `/superpowers:brainstorm` |
+| `/superpowers-openspec:write-plan` | `/superpowers:write-plan` |
+| `/superpowers-openspec:execute-plan` | `/superpowers:execute-plan` |
 
 ## The Basic Workflow
 
