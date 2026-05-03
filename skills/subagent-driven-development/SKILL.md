@@ -80,7 +80,8 @@ digraph process {
     "Mark task complete in TodoWrite" -> "More tasks remain?";
     "More tasks remain?" -> "Dispatch implementer subagent (./implementer-prompt.md)" [label="yes"];
     "More tasks remain?" -> "Dispatch final code reviewer subagent for entire implementation" [label="no"];
-    "Dispatch final code reviewer subagent for entire implementation" -> "Use superpowers:finishing-a-development-branch";
+    "Dispatch final code reviewer subagent for entire implementation" -> "Archive OpenSpec change";
+    "Archive OpenSpec change" -> "Use superpowers:finishing-a-development-branch";
 }
 ```
 
@@ -198,6 +199,21 @@ Final reviewer: All requirements met, ready to merge
 
 Done!
 ```
+
+## OpenSpec Archive
+
+After the final code reviewer approves and before finishing the branch, archive the OpenSpec change:
+
+1. Read the `**OpenSpec Change:**` line from the plan header to get `<change-name>`
+2. Run:
+
+```bash
+openspec archive <change-name> --skip-specs
+git add .openspec/
+git commit -m "chore: archive openspec change <change-name>"
+```
+
+If the plan has no `**OpenSpec Change:**` line, skip this step.
 
 ## Advantages
 

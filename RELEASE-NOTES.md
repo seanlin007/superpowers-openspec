@@ -1,5 +1,25 @@
 # Superpowers Release Notes
 
+> This fork tracks upstream [obra/superpowers](https://github.com/obra/superpowers). Fork-specific changes are prefixed with **[openspec]**.
+
+## v5.0.7-openspec.1 (2026-05-03)
+
+### [openspec] OpenSpec Integration
+
+Fork of v5.0.7 with OpenSpec spec-traceability integration added.
+
+**New skill:**
+- `openspec` — utility skill for OpenSpec setup, change proposal creation, and archiving. Covers installation check, `openspec init`, `openspec new change`, and `openspec archive`.
+
+**Modified skills:**
+- `writing-plans` — after saving a plan, now creates an OpenSpec change proposal and records the change name in the plan header. `openspec` must be installed or the step will halt.
+- `executing-plans` — added Step 3 to archive the OpenSpec change after all tasks complete, before calling `finishing-a-development-branch`.
+- `subagent-driven-development` — added OpenSpec archive step after final code reviewer approves, before finishing the branch.
+
+**Prerequisite:** `openspec` CLI v1.x (`npm install -g openspec`) must be present on the machine.
+
+---
+
 ## v5.0.7 (2026-03-31)
 
 ### GitHub Copilot CLI Support

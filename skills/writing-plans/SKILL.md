@@ -131,6 +131,47 @@ After writing the complete plan, look at the spec with fresh eyes and check the 
 
 If you find issues, fix them inline. No need to re-review — just fix and move on. If you find a spec requirement with no task, add the task.
 
+## OpenSpec Integration
+
+After saving the plan file, create an OpenSpec change proposal to preserve the spec:
+
+**1. Verify OpenSpec is installed — REQUIRED:**
+
+```bash
+openspec --version
+```
+
+If not found, stop and install it: `npm install -g openspec`. Do not proceed without it.
+
+**2. Initialize OpenSpec if `.openspec/` does not exist in the repo root:**
+
+```bash
+openspec init --tools none
+git add .openspec/
+git commit -m "chore: initialize openspec for spec traceability"
+```
+
+**3. Create a change proposal using the plan's feature name slug:**
+
+```bash
+openspec new change <feature-name> --description "<goal sentence from plan header>"
+```
+
+**4. Add the change name to the plan header** (after the `**Tech Stack:**` line):
+
+```markdown
+**OpenSpec Change:** `<feature-name>`
+```
+
+**5. Commit:**
+
+```bash
+git add docs/superpowers/plans/<filename>.md .openspec/
+git commit -m "chore: link plan to openspec change <feature-name>"
+```
+
+---
+
 ## Execution Handoff
 
 After saving the plan, offer execution choice:

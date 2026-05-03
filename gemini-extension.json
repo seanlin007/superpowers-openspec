@@ -1,6 +1,6 @@
 {
-  "name": "superpowers",
-  "description": "Core skills library: TDD, debugging, collaboration patterns, and proven techniques",
-  "version": "5.0.7",
+  "name": "superpowers-openspec",
+  "description": "Core skills library with OpenSpec integration: TDD, debugging, collaboration patterns, and proven techniques — fork of obra/superpowers",
+  "version": "5.0.7-openspec.1",
   "contextFileName": "GEMINI.md"
 }

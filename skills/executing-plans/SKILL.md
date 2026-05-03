@@ -29,7 +29,22 @@ For each task:
 3. Run verifications as specified
 4. Mark as completed
 
-### Step 3: Complete Development
+### Step 3: Archive OpenSpec Change
+
+After all tasks are complete and verified, archive the OpenSpec change to preserve the spec:
+
+1. Read the `**OpenSpec Change:**` line from the plan header to get `<change-name>`
+2. Run:
+
+```bash
+openspec archive <change-name> --skip-specs
+git add .openspec/
+git commit -m "chore: archive openspec change <change-name>"
+```
+
+If the plan has no `**OpenSpec Change:**` line, skip this step.
+
+### Step 4: Complete Development
 
 After all tasks complete and verified:
 - Announce: "I'm using the finishing-a-development-branch skill to complete this work."

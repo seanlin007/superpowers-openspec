@@ -1,4 +1,12 @@
-# Superpowers
+# Superpowers (w/ OpenSpec Integration)
+
+> **This is a fork of [obra/superpowers](https://github.com/obra/superpowers) with OpenSpec integration added.**
+>
+> **What's different:** The `writing-plans`, `executing-plans`, and `subagent-driven-development` skills now sync with [OpenSpec](https://openspec.dev) to preserve full spec traceability alongside implementation. A new `openspec` skill handles setup and archive operations.
+>
+> **Prerequisite:** [`openspec` CLI](https://openspec.dev) must be installed (`npm install -g openspec`) before using the planning workflow.
+
+---
 
 Superpowers is a complete software development methodology for your coding agents, built on top of a set of composable skills and some initial instructions that make sure your agent uses them.
 
@@ -26,88 +34,51 @@ Thanks!
 
 ## Installation
 
-**Note:** Installation differs by platform. 
+> **This is a fork.** It is not listed on any official marketplace. Install directly from GitHub or a local clone using the instructions below.
+>
+> **Before installing:** ensure `openspec` is available on your machine:
+> ```bash
+> npm install -g openspec
+> ```
 
-### Claude Code Official Marketplace
+### Claude Code
 
-Superpowers is available via the [official Claude plugin marketplace](https://claude.com/plugins/superpowers)
-
-Install the plugin from Anthropic's official marketplace:
-
-```bash
-/plugin install superpowers@claude-plugins-official
-```
-
-### Claude Code (Superpowers Marketplace)
-
-The Superpowers marketplace provides Superpowers and some other related plugins for Claude Code.
-
-In Claude Code, register the marketplace first:
+Clone the repo and install from local path:
 
 ```bash
-/plugin marketplace add obra/superpowers-marketplace
+git clone https://github.com/seanlin007/superpowers.git ~/superpowers-openspec
+claude plugin install ~/superpowers-openspec --scope user
 ```
 
-Then install the plugin from this marketplace:
+Use `--scope project` instead of `--scope user` to limit the plugin to the current project only (recommended if you have the original `superpowers` installed at user scope — project scope takes priority).
+
+To update:
 
 ```bash
-/plugin install superpowers@superpowers-marketplace
+cd ~/superpowers-openspec && git pull
 ```
-
-### OpenAI Codex CLI
-
-- Open plugin search interface
-
-```bash
-/plugins
-```
-
-Search for Superpowers
-
-```bash
-superpowers
-```
-
-Select `Install Plugin`
-
-### OpenAI Codex App
-
-- In the Codex app, click on Plugins in the sidebar.
-- You should see `Superpowers` in the Coding section. 
-- Click the `+` next to Superpowers and follow the prompts.
-
-
-### Cursor (via Plugin Marketplace)
-
-In Cursor Agent chat, install from marketplace:
-
-```text
-/add-plugin superpowers
-```
-
-or search for "superpowers" in the plugin marketplace.
-
-### OpenCode
-
-Tell OpenCode:
-
-```
-Fetch and follow instructions from https://raw.githubusercontent.com/obra/superpowers/refs/heads/main/.opencode/INSTALL.md
-```
-
-**Detailed docs:** [docs/README.opencode.md](docs/README.opencode.md)
 
 ### GitHub Copilot CLI
 
+Clone the repo and install from local path:
+
 ```bash
-copilot plugin marketplace add obra/superpowers-marketplace
-copilot plugin install superpowers@superpowers-marketplace
+git clone https://github.com/seanlin007/superpowers.git ~/superpowers-openspec
+copilot plugin install ~/superpowers-openspec
+```
+
+To update:
+
+```bash
+cd ~/superpowers-openspec && git pull
 ```
 
 ### Gemini CLI
 
+Install directly from GitHub:
+
 ```bash
-gemini extensions install https://github.com/obra/superpowers
+gemini extensions install https://github.com/seanlin007/superpowers
 ```
 
 To update:
@@ -115,6 +86,53 @@ To update:
 ```bash
 gemini extensions update superpowers
 ```
+
+### OpenCode
+
+Tell OpenCode:
+
+```
+Fetch and follow instructions from https://raw.githubusercontent.com/seanlin007/superpowers/main/.opencode/INSTALL.md
+```
+
+### OpenAI Codex CLI
+
+Clone the repo and install from local path:
+
+```bash
+git clone https://github.com/seanlin007/superpowers.git ~/superpowers-openspec
+```
+
+Open the plugin interface and point it to the local path:
+
+```bash
+/plugins
+```
+
+Select `Install from local path` and enter `~/superpowers-openspec`.
+
+### Cursor
+
+Clone the repo locally:
+
+```bash
+git clone https://github.com/seanlin007/superpowers.git ~/superpowers-openspec
+```
+
+In Cursor Agent chat, install from local path:
+
+```text
+/add-plugin ~/superpowers-openspec
+```
+
+---
+
+### Conflict with original superpowers
+
+Both this fork and the original share the plugin name `superpowers`. **Do not enable both at the same time** — skills from each would conflict. Use one of these strategies:
+
+- **Replace:** uninstall the original and install this fork at user scope.
+- **Per-project override:** keep the original at user scope (disabled), install this fork at project scope for projects that need OpenSpec traceability. Project scope takes priority.
 
 ## The Basic Workflow
 
