@@ -29,7 +29,7 @@ Tests cannot run locally. All pytest execution happens inside a Kubernetes pod w
 
    With a specific filter:
    ```bash
-   option="{{ARGUMENTS}}" bash kubeops.sh test
+   bash kubeops.sh test {{ARGUMENTS}}
    ```
 
    Without a filter (all tests):

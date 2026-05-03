@@ -13,7 +13,7 @@ Creates a GitHub PR with DeepFlow's standard checklist, after verifying all qual
 1. **Run quality gates** (all three must pass before creating PR):
 
    ```bash
-   pre-commit run --all-files
+   pre-commit run --from-ref origin/main --to-ref HEAD
    python manage.py makemigrations --check
    bash kubeops.sh test
    ```
@@ -61,7 +61,7 @@ Creates a GitHub PR with DeepFlow's standard checklist, after verifying all qual
 
    ## Test Evidence
    - [ ] `bash kubeops.sh test` passes
-   - [ ] `pre-commit run --all-files` clean
+   - [ ] `pre-commit run --from-ref origin/main --to-ref HEAD` clean
    - [ ] `python manage.py makemigrations --check` exits 0
    EOF
    )"

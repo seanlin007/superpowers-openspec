@@ -22,7 +22,7 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 
 When writing plans for DeepFlow, keep the following architecture constraints in mind.
 
-**Test execution:** Tests run in Kubernetes — never `pytest` directly. Always use `bash kubeops.sh test` or `option="TestClass" bash kubeops.sh test`. Plans must reflect this in every verification step.
+**Test execution:** Tests run in Kubernetes — never `pytest` directly. Always use `bash kubeops.sh test` (all tests) or `bash kubeops.sh test TestClassName` (specific class). Plans must reflect this in every verification step.
 
 **Backend structure:** Django monolith at `backend/src/`. Business logic lives in `handler.py` files (e.g., `MVCHandler`, `AmsDBOp`), not views. Views delegate to handlers; handlers call DB-op classes.
 
@@ -32,7 +32,7 @@ When writing plans for DeepFlow, keep the following architecture constraints in 
 
 **Async:** Celery tasks routed to named queues defined in `aipaas2/celery.py`.
 
-**Linting:** `ruff` (line-length 100, LF endings) + `prettier` (YAML only). Run `pre-commit run --all-files` before committing. Never use `autopep8` or `black`.
+**Linting:** `ruff` (line-length 100, LF endings) + `prettier` (YAML only). Run `pre-commit run --from-ref origin/main --to-ref HEAD` before committing. Never use `autopep8` or `black`.
 
 **Frontend:** Nuxt 2 / Vue 2 / Vuetify at `frontend/`. Changes here don't require Kubernetes testing.
 

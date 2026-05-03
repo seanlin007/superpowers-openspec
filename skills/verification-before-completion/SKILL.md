@@ -42,7 +42,7 @@ Skip any step = lying, not verifying
 | Claim | Requires | Not Sufficient |
 |-------|----------|----------------|
 | Tests pass | `bash kubeops.sh test` output: 0 failures | Previous run, "should pass" |
-| Linter clean | `pre-commit run --all-files` output: 0 errors | Partial check, extrapolation |
+| Linter clean | `pre-commit run --from-ref origin/main --to-ref HEAD` output: 0 errors | Partial check, extrapolation |
 | No missing migrations | `python manage.py makemigrations --check` exits 0 | Assumed no model changes |
 | Bug fixed | Test original symptom: passes | Code changed, assumed fixed |
 | Regression test works | Red-green cycle verified | Test passes once |
@@ -83,7 +83,7 @@ Skip any step = lying, not verifying
 
 **Lint:**
 ```
-✅ [pre-commit run --all-files] [See: Passed] "Lint clean"
+✅ [pre-commit run --from-ref origin/main --to-ref HEAD] [See: Passed] "Lint clean"
 ❌ "I didn't change anything that ruff would flag"
 ```
 

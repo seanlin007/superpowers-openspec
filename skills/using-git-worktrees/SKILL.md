@@ -121,13 +121,7 @@ if [ -f go.mod ]; then go mod download; fi
 
 ### 4. Verify Clean Baseline
 
-**DeepFlow:** Tests run in Kubernetes and take several minutes. Skip the baseline test run — it is impractical before each worktree. Instead, verify lint passes locally:
-
-```bash
-pre-commit run --all-files
-```
-
-If lint fails, fix before proceeding.
+**DeepFlow:** Tests run in Kubernetes and take several minutes. Skip the baseline test run — it is impractical before each worktree. Pre-commit hooks will run automatically on each commit. No baseline lint check needed at worktree creation.
 
 For other project types, run tests to ensure worktree starts clean:
 

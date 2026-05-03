@@ -21,7 +21,7 @@ Guide completion of development work by presenting clear options and handling ch
 
 **1a. Lint:**
 ```bash
-pre-commit run --all-files
+pre-commit run --from-ref origin/main --to-ref HEAD
 ```
 Fix any ruff or prettier failures before continuing.
 
@@ -125,7 +125,7 @@ gh pr create --title "<title>" --body "$(cat <<'EOF'
 
 ## Test Plan
 - [ ] `bash kubeops.sh test` passes
-- [ ] `pre-commit run --all-files` clean
+- [ ] `pre-commit run --from-ref origin/main --to-ref HEAD` clean
 - [ ] `python manage.py makemigrations --check` no pending migrations
 EOF
 )"

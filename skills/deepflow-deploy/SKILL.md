@@ -19,7 +19,7 @@ All build and deploy operations go through `bash kubeops.sh`. Do not use `devspa
    |-----------|---------|
    | Full dev environment (Kind + deploy) | `bash kubeops.sh dev` |
    | Build all images | `bash kubeops.sh build` |
-   | Build single image | `option=<target> bash kubeops.sh build` |
+   | Build single image | `bash kubeops.sh build <target>` |
    | Push images to registry | `bash kubeops.sh push` |
    | Prepare infra only | `bash kubeops.sh prepare-infra` |
    | Prepare app only | `bash kubeops.sh prepare-dev` |

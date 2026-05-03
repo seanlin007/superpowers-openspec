@@ -16,7 +16,7 @@ description: Use when implementing any feature or bugfix, before writing impleme
 bash kubeops.sh test
 
 # Run specific test class or keyword
-option="TestClassName" bash kubeops.sh test
+bash kubeops.sh test TestClassName
 ```
 
 Use `run_in_background: true` — tests take several minutes. After completion, tear down the test pod with `bash kubeops.sh testreset` (ask user first).
@@ -135,7 +135,7 @@ Vague name, tests mock not code
 **MANDATORY. Never skip.**
 
 ```bash
-option="TestClassName" bash kubeops.sh test
+bash kubeops.sh test TestClassName
 ```
 
 Run in background (`run_in_background: true`) — takes several minutes.
@@ -192,7 +192,7 @@ Don't add features, refactor other code, or "improve" beyond the test.
 **MANDATORY.**
 
 ```bash
-option="TestClassName" bash kubeops.sh test
+bash kubeops.sh test TestClassName
 ```
 
 Run in background (`run_in_background: true`).
@@ -325,7 +325,7 @@ test('rejects empty email', async () => {
 
 **Verify RED**
 ```bash
-$ option="TestEmailValidation" bash kubeops.sh test
+$ bash kubeops.sh test TestEmailValidation
 FAIL: expected 'Email required', got undefined
 ```
 
@@ -341,7 +341,7 @@ function submitForm(data: FormData) {
 
 **Verify GREEN**
 ```bash
-$ option="TestEmailValidation" bash kubeops.sh test
+$ bash kubeops.sh test TestEmailValidation
 PASS
 ```
 
