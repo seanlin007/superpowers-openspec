@@ -27,22 +27,31 @@ For each task:
 1. Mark as in_progress
 2. Follow each step exactly (plan has bite-sized steps)
 3. Run verifications as specified
-4. Mark as completed
+4. **REQUIRED:** Use `superpowers-openspec:verification-before-completion` before marking as completed
+5. Mark as completed
 
 ### Step 3: Archive OpenSpec Change
 
 After all tasks are complete and verified, archive the OpenSpec change to preserve the spec:
 
-1. Read the `**OpenSpec Change:**` line from the plan header to get `<change-name>`
-2. Run:
+1. Read the `**OpenSpec Change:**` line from the plan header to get `<change-name>`. If none, skip this step.
+2. Decide whether the completed work changes user-facing behavior, contracts, or capabilities that should be reflected in top-level specs.
+3. Use `--skip-specs` only for tooling, infrastructure, tests, docs, refactors, or other implementation-only changes. File paths can help you inspect the diff, but they are hints, not the decision rule.
+4. If you are unsure, omit `--skip-specs` and archive with the spec update.
 
+**User-facing change:**
+```bash
+openspec archive <change-name>
+git add .openspec/
+git commit -m "chore: archive openspec change <change-name> with spec update"
+```
+
+**Internal/infrastructure change:**
 ```bash
 openspec archive <change-name> --skip-specs
 git add .openspec/
 git commit -m "chore: archive openspec change <change-name>"
 ```
-
-If the plan has no `**OpenSpec Change:**` line, skip this step.
 
 ### Step 4: Complete Development
 

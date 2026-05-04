@@ -1,24 +1,19 @@
 # Superpowers (w/ OpenSpec Integration)
 
-> **This is a fork of [obra/superpowers](https://github.com/obra/superpowers).** It adds OpenSpec spec traceability and a DeepFlow project-specific branch.
+> **This is a fork of [obra/superpowers](https://github.com/obra/superpowers).** It adds OpenSpec spec traceability and includes the DeepFlow-oriented workflow customizations directly on `main`.
 >
 > **Prerequisite:** [`openspec` CLI](https://openspec.dev) must be installed (`npm install -g openspec`) before using the planning workflow.
 
-## Branches
+## Branch
 
 | Branch | Based on | Description |
 |--------|----------|-------------|
-| `main` | obra/superpowers v5.0.7 | OpenSpec integration — `writing-plans`, `executing-plans`, and `subagent-driven-development` sync specs to OpenSpec. New `openspec` skill for setup and archive. |
-| `deepflow` | `main` | All of `main` plus DeepFlow project-specific customizations — Kubernetes test execution, Django architecture context, quality gates, and project workflow skills. |
+| `main` | obra/superpowers v5.0.7 | OpenSpec integration plus the DeepFlow-oriented customizations in this fork, including Kubernetes test execution, Django architecture context, quality gates, and project workflow skills. |
 
-Install a specific branch:
+Clone the main branch:
 
 ```bash
-# main (OpenSpec only)
 git clone -b main https://github.com/seanlin007/superpowers-openspec.git ~/superpowers-openspec
-
-# deepflow (OpenSpec + DeepFlow customizations)
-git clone -b deepflow https://github.com/seanlin007/superpowers-openspec.git ~/superpowers-deepflow
 ```
 
 ---
@@ -75,15 +70,13 @@ cd ~/superpowers-openspec && git pull
 
 ### GitHub Copilot CLI
 
-Install directly from GitHub (installs the `main` branch — OpenSpec version):
+Install directly from GitHub:
 
 ```bash
 copilot plugin install seanlin007/superpowers-openspec
 ```
 
 > **Note:** Direct repo installs are being deprecated by Copilot CLI. The marketplace format will be required in a future release.
-
-> **DeepFlow branch:** Branch-specific installs are not supported by Copilot CLI. To use the DeepFlow customizations, set the `deepflow` branch as your fork's default branch on GitHub, then run the install command above.
 
 To update, reinstall:
 
@@ -204,9 +197,9 @@ This fork uses the plugin name `superpowers-openspec` (see `package.json`), whic
 
 ---
 
-### DeepFlow Branch — Additional Skills
+### DeepFlow-Oriented Skills
 
-*Available in the `deepflow` branch only.*
+*Included on `main` in this fork.*
 
 **Project Workflow**
 - **deepflow-test** - Run pytest suite via `kubeops.sh` with auto-detection of test scope from changed files

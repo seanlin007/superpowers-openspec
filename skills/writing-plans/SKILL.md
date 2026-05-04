@@ -18,6 +18,10 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 **Save plans to:** `docs/superpowers/plans/YYYY-MM-DD-<feature-name>.md`
 - (User preferences for plan location override this default)
 
+**REQUIRED — two mandatory steps frame this skill:**
+1. **Before writing:** verify OpenSpec is installed and initialized (see OpenSpec Integration below).
+2. **After saving the plan file:** create the OpenSpec change proposal. Do NOT proceed to Execution Handoff without completing both steps.
+
 ## DeepFlow Project Context
 
 When writing plans for DeepFlow, keep the following architecture constraints in mind.
@@ -35,6 +39,10 @@ When writing plans for DeepFlow, keep the following architecture constraints in 
 **Linting:** `ruff` (line-length 100, LF endings) + `prettier` (YAML only). Run `pre-commit run --from-ref origin/main --to-ref HEAD` before committing. Never use `autopep8` or `black`.
 
 **Frontend:** Nuxt 2 / Vue 2 / Vuetify at `frontend/`. Changes here don't require Kubernetes testing.
+
+## OpenSpec Setup — REQUIRED BEFORE WRITING
+
+**Invoke `superpowers-openspec:openspec` skill now** to verify OpenSpec is installed and initialize `.openspec/` if it does not exist. Do not proceed to Scope Check until this is done.
 
 ---
 
@@ -151,11 +159,11 @@ After writing the complete plan, look at the spec with fresh eyes and check the 
 
 If you find issues, fix them inline. No need to re-review — just fix and move on. If you find a spec requirement with no task, add the task.
 
-## OpenSpec Integration
+## OpenSpec Integration — REQUIRED, DO NOT SKIP
 
-After saving the plan file, create an OpenSpec change proposal to preserve the spec:
+> **This is not optional.** Run these steps before writing the plan (steps 1–2) and immediately after saving the plan file (steps 3–5). Skipping this breaks spec traceability. Do NOT move to Execution Handoff until all five steps are done.
 
-**1. Verify OpenSpec is installed — REQUIRED:**
+**Step 1 — Verify OpenSpec is installed (run BEFORE writing the plan):**
 
 ```bash
 openspec --version
@@ -163,7 +171,7 @@ openspec --version
 
 If not found, stop and install it: `npm install -g openspec`. Do not proceed without it.
 
-**2. Initialize OpenSpec if `.openspec/` does not exist in the repo root:**
+**Step 2 — Initialize OpenSpec if `.openspec/` does not exist in the repo root (run BEFORE writing the plan):**
 
 ```bash
 openspec init --tools none
@@ -171,24 +179,26 @@ git add .openspec/
 git commit -m "chore: initialize openspec for spec traceability"
 ```
 
-**3. Create a change proposal using the plan's feature name slug:**
+**Step 3 — Create a change proposal immediately after saving the plan file:**
 
 ```bash
 openspec new change <feature-name> --description "<goal sentence from plan header>"
 ```
 
-**4. Add the change name to the plan header** (after the `**Tech Stack:**` line):
+**Step 4 — Add the change name to the plan header** (after the `**Tech Stack:**` line):
 
 ```markdown
 **OpenSpec Change:** `<feature-name>`
 ```
 
-**5. Commit:**
+**Step 5 — Commit:**
 
 ```bash
 git add docs/superpowers/plans/<filename>.md .openspec/
 git commit -m "chore: link plan to openspec change <feature-name>"
 ```
+
+Only after completing step 5 may you proceed to Execution Handoff.
 
 ---
 

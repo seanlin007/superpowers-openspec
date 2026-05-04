@@ -2,13 +2,13 @@
 
 > This fork tracks upstream [obra/superpowers](https://github.com/obra/superpowers).
 > - **`main` branch** changes are prefixed with **[openspec]**
-> - **`deepflow` branch** changes are prefixed with **[deepflow]**
+> - Historical **[deepflow]** labels are retained for older DeepFlow-specific changes that now ship on `main`
 
-## deepflow branch — v5.0.7-openspec.1 (2026-05-03)
+## Historical deepflow branch — v5.0.7-openspec.1 (2026-05-03)
 
 ### [deepflow] DeepFlow Project Customizations
 
-Project-specific overlay on top of `main`. Includes all OpenSpec changes plus:
+Project-specific overlay that originally lived on top of `main`. These changes now ship on `main`. This entry is kept as historical release context.
 
 **Modified skills:**
 - `test-driven-development` — override test execution to `bash kubeops.sh test TestClassName` (tests run in Kubernetes, never pytest locally); all RED/GREEN verify steps updated

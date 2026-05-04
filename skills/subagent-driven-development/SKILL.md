@@ -104,9 +104,9 @@ Use the least powerful model that can handle each role to conserve cost and incr
 
 Implementer subagents report one of four statuses. Handle each appropriately:
 
-**DONE:** Proceed to spec compliance review.
+**DONE:** Use `superpowers-openspec:verification-before-completion` to verify the task output, then proceed to spec compliance review.
 
-**DONE_WITH_CONCERNS:** The implementer completed the work but flagged doubts. Read the concerns before proceeding. If the concerns are about correctness or scope, address them before review. If they're observations (e.g., "this file is getting large"), note them and proceed to review.
+**DONE_WITH_CONCERNS:** The implementer completed the work but flagged doubts. Read the concerns before proceeding. If the concerns are about correctness or scope, address them before review. If they're observations (e.g., "this file is getting large"), note them. Then use `superpowers-openspec:verification-before-completion` before proceeding to review.
 
 **NEEDS_CONTEXT:** The implementer needs information that wasn't provided. Provide the missing context and re-dispatch.
 
@@ -204,16 +204,24 @@ Done!
 
 After the final code reviewer approves and before finishing the branch, archive the OpenSpec change:
 
-1. Read the `**OpenSpec Change:**` line from the plan header to get `<change-name>`
-2. Run:
+1. Read the `**OpenSpec Change:**` line from the plan header to get `<change-name>`. If none, skip this step.
+2. Decide whether the completed work changes user-facing behavior, contracts, or capabilities that should be reflected in top-level specs.
+3. Use `--skip-specs` only for tooling, infrastructure, tests, docs, refactors, or other implementation-only changes. File paths can help you inspect the diff, but they are hints, not the decision rule.
+4. If you are unsure, omit `--skip-specs` and archive with the spec update.
 
+**User-facing change:**
+```bash
+openspec archive <change-name>
+git add .openspec/
+git commit -m "chore: archive openspec change <change-name> with spec update"
+```
+
+**Internal/infrastructure change:**
 ```bash
 openspec archive <change-name> --skip-specs
 git add .openspec/
 git commit -m "chore: archive openspec change <change-name>"
 ```
-
-If the plan has no `**OpenSpec Change:**` line, skip this step.
 
 ## Advantages
 
