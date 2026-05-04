@@ -106,6 +106,10 @@ digraph brainstorming {
 
 ## After the Design
 
+**REQUIRED — Set up worktree first:**
+
+Before writing any files or making any commits, invoke `superpowers-openspec:using-git-worktrees` to create an isolated feature branch. All subsequent commits (spec, plan, openspec change) must land there, not on main.
+
 **Documentation:**
 
 - Write the validated design (spec) to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md`
