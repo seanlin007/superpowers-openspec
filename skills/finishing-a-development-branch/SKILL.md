@@ -17,21 +17,41 @@ Guide completion of development work by presenting clear options and handling ch
 
 ### Step 1: Verify Tests and Quality Gates
 
+**REQUIRED:** Use `superpowers-openspec:verification-before-completion` — the Iron Law applies here. Do not present options until all checks below pass and evidence is in hand.
+
+**1a. Clean working tree — no uncommitted changes allowed:**
+```bash
+git status
+```
+If there are uncommitted or untracked files, stop. Commit or discard them before continuing.
+
 **Before presenting options, run all three checks in order:**
 
-**1a. Lint:**
+**1b. Detect upstream branch:**
 ```bash
-pre-commit run --from-ref origin/main --to-ref HEAD
+UPSTREAM=$(git rev-parse --abbrev-ref @{u} 2>/dev/null || echo "origin/main")
+BASE=$(git merge-base HEAD $UPSTREAM)
+echo "Upstream: $UPSTREAM  Base: $BASE"
+```
+Use `$BASE` in the lint command below, and `$UPSTREAM` as the base branch in Step 2.
+
+**1c. Lint:**
+```bash
+pre-commit run --from-ref $BASE --to-ref HEAD
 ```
 Fix any ruff or prettier failures before continuing.
 
-**1b. Migration check:**
+**1d. Migration check (git-based — Django runs in K8s, cannot run locally):**
 ```bash
-python manage.py makemigrations --check
+git diff --name-only $BASE HEAD | grep 'models\.py'
 ```
-If this outputs pending migrations, create them and commit before continuing.
+If any `models.py` files appear in the output, check that a corresponding new migration file exists in the same diff:
+```bash
+git diff --name-only $BASE HEAD | grep 'migrations/'
+```
+If model files changed but no migration files appear, stop and create the migration inside the K8s pod before continuing.
 
-**1c. Test suite** (runs in Kubernetes — takes several minutes):
+**1e. Test suite** (runs in Kubernetes — takes several minutes):
 ```bash
 bash kubeops.sh test
 ```
@@ -52,12 +72,9 @@ Stop. Don't proceed to Step 2.
 
 ### Step 2: Determine Base Branch
 
-```bash
-# Try common base branches
-git merge-base HEAD main 2>/dev/null || git merge-base HEAD master 2>/dev/null
-```
+Use `$UPSTREAM` detected in Step 1b as the base branch. If upstream was not set, ask:
 
-Or ask: "This branch split from main - is that correct?"
+> "Which branch did this branch split from? (e.g., main, develop, release/x.y)"
 
 ### Step 3: Present Options
 
@@ -110,6 +127,10 @@ gh pr create --title "<title>" --body "$(cat <<'EOF'
 ## Summary
 <2-3 bullets of what changed>
 
+## OpenSpec
+- [ ] No OpenSpec change (infrastructure / tooling only)
+- [ ] OpenSpec change archived: `<change-name>`
+
 ## Migrations
 - [ ] No new migrations
 - [ ] New migrations included and reviewed
@@ -125,8 +146,8 @@ gh pr create --title "<title>" --body "$(cat <<'EOF'
 
 ## Test Plan
 - [ ] `bash kubeops.sh test` passes
-- [ ] `pre-commit run --from-ref origin/main --to-ref HEAD` clean
-- [ ] `python manage.py makemigrations --check` no pending migrations
+- [ ] `pre-commit run --from-ref <base> --to-ref HEAD` clean
+- [ ] No missing migrations (models.py changed → migration file present in diff)
 EOF
 )"
 ```
@@ -190,7 +211,7 @@ git worktree remove <worktree-path>
 
 **Skipping quality gate verification**
 - **Problem:** Merge broken code, create failing PR with lint errors or missing migrations
-- **Fix:** Always run pre-commit, makemigrations --check, and kubeops.sh test before offering options
+- **Fix:** Always run pre-commit (from upstream base), migration diff check, and kubeops.sh test before offering options
 
 **Open-ended questions**
 - **Problem:** "What should I do next?" → ambiguous
