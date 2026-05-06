@@ -56,6 +56,10 @@ Creates a GitHub PR with DeepFlow's standard checklist, after verifying all qual
    ## Summary
    <2-3 bullets of what changed and why>
 
+   ## OpenSpec
+   - [ ] No OpenSpec change (infrastructure / tooling only)
+   - [ ] OpenSpec change archived: `<change-name>`
+
    ## Migrations
    - [ ] No new migrations
    - [ ] New migrations included and reviewed

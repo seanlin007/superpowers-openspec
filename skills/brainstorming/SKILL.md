@@ -59,7 +59,10 @@ digraph brainstorming {
     "Write design doc" -> "Spec self-review\n(fix inline)";
     "Spec self-review\n(fix inline)" -> "User reviews spec?";
     "User reviews spec?" -> "Write design doc" [label="changes requested"];
-    "User reviews spec?" -> "Invoke writing-plans skill" [label="approved"];
+    "User reviews spec?" -> "Grill-me? (optional)" [label="approved"];
+    "Grill-me? (optional)" -> "Invoke grill-me skill" [label="yes"];
+    "Grill-me? (optional)" -> "Invoke writing-plans skill" [label="no"];
+    "Invoke grill-me skill" -> "Invoke writing-plans skill";
 }
 ```
 

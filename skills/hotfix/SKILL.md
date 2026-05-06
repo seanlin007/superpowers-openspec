@@ -57,7 +57,7 @@ Do not proceed if any check fails.
 
 ## Step 5: Create PR
 
-Invoke `superpowers-openspec:deepflow-pr` or use `superpowers-openspec:finishing-a-development-branch` Option 2 directly.
+Invoke `superpowers-openspec:deepflow-pr`.
 
 PR title format: `fix(<scope>): <description>`
 

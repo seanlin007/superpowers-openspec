@@ -15,6 +15,8 @@ Load plan, review critically, execute all tasks, report when complete.
 
 ## The Process
 
+**REQUIRED before starting:** Confirm you are on a feature branch in a worktree, not on main. If no worktree exists, invoke `superpowers-openspec:using-git-worktrees` first.
+
 ### Step 1: Load and Review Plan
 1. Read plan file
 2. Review critically - identify any questions or concerns about the plan
