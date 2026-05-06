@@ -75,7 +75,21 @@ digraph brainstorming {
 - For appropriately-scoped projects, ask questions one at a time to refine the idea
 - Prefer multiple choice questions when possible, but open-ended is fine too
 - Only one question per message - if a topic needs more exploration, break it into multiple questions
-- Focus on understanding: purpose, constraints, success criteria
+
+**Question dimensions — cover all of these before proposing approaches:**
+
+Work through these categories systematically. Skip a dimension only if the answer is already unambiguously clear from context or prior answers. Do not proceed to "Propose 2-3 approaches" until every dimension below has a clear answer.
+
+| Dimension | What to establish |
+|-----------|------------------|
+| **Problem definition** | What problem does this solve? Who experiences it and how often? |
+| **Success criteria** | How do you know it's done? What does "working correctly" look like? |
+| **Constraints** | Tech stack, deadlines, compatibility, performance requirements? |
+| **Edge cases & errors** | What happens when inputs are invalid or dependencies fail? |
+| **Integration points** | Which existing APIs, services, or modules does this touch? |
+| **Data changes** | New models, schema changes, or migrations required? |
+| **Permissions & RBAC** | Who can perform this action? Which permission tier applies? |
+| **Scale & volume** | Any expectations on data volume, request rate, or response time? |
 
 **Exploring approaches:**
 
