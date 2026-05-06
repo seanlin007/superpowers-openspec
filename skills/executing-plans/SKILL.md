@@ -68,6 +68,8 @@ After all tasks complete and verified:
 - You don't understand an instruction
 - Verification fails repeatedly
 
+**When blocked by a bug or test failure:** Use `superpowers-openspec:systematic-debugging` before asking for help or guessing. Only escalate to the human if debugging confirms the plan itself is wrong.
+
 **Ask for clarification rather than guessing.**
 
 ## When to Revisit Earlier Steps

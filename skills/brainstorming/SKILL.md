@@ -144,9 +144,13 @@ Fix any issues inline. No need to re-review — just fix and move on.
 **User Review Gate:**
 After the spec review loop passes, ask the user to review the written spec before proceeding:
 
-> "Spec written and committed to `<path>`. Please review it and let me know if you want to make any changes before we start writing out the implementation plan."
+> "Spec written and committed to `<path>`. Please review it and let me know if you want to make any changes before we start writing out the implementation plan.
+>
+> I can also stress-test this design by grilling you on every decision before we commit to a plan — want me to do that first? (yes / no)"
 
-Wait for the user's response. If they request changes, make them and re-run the spec review loop. Only proceed once the user approves.
+- If changes requested: make them and re-run the spec review loop.
+- If stress-test requested: invoke `superpowers-openspec:grill-me` before writing-plans.
+- Only proceed to writing-plans once the user approves the spec.
 
 **Implementation:**
 

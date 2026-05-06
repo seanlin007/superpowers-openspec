@@ -111,10 +111,11 @@ Implementer subagents report one of four statuses. Handle each appropriately:
 **NEEDS_CONTEXT:** The implementer needs information that wasn't provided. Provide the missing context and re-dispatch.
 
 **BLOCKED:** The implementer cannot complete the task. Assess the blocker:
-1. If it's a context problem, provide more context and re-dispatch with the same model
-2. If the task requires more reasoning, re-dispatch with a more capable model
-3. If the task is too large, break it into smaller pieces
-4. If the plan itself is wrong, escalate to the human
+1. If it's a bug or test failure, use `superpowers-openspec:systematic-debugging` to diagnose before re-dispatching
+2. If it's a context problem, provide more context and re-dispatch with the same model
+3. If the task requires more reasoning, re-dispatch with a more capable model
+4. If the task is too large, break it into smaller pieces
+5. If the plan itself is wrong, escalate to the human
 
 **Never** ignore an escalation or force the same model to retry without changes. If the implementer said it's stuck, something needs to change.
 
