@@ -154,6 +154,14 @@ EOF
 
 Then: Cleanup worktree (Step 5)
 
+> **After PR is created:** When reviewer feedback arrives, use `superpowers-openspec:receiving-code-review` to evaluate and respond. Do not implement suggestions without verification.
+>
+> **After PR is merged:** clean up the worktree:
+> ```bash
+> git worktree remove <worktree-path>
+> git branch -d <feature-branch>
+> ```
+
 #### Option 3: Keep As-Is
 
 Report: "Keeping branch <name>. Worktree preserved at <path>."
