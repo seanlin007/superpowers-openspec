@@ -29,7 +29,7 @@ You MUST create a task for each of these items and complete them in order:
 6. **Write design doc** — save to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md` and commit
 7. **Spec self-review** — quick inline check for placeholders, contradictions, ambiguity, scope (see below)
 8. **User reviews written spec** — ask user to review the spec file before proceeding
-9. **Transition to implementation** — invoke writing-plans skill to create implementation plan
+9. **Transition to implementation** — optionally invoke grill-me to stress-test the spec, then invoke writing-plans to create the implementation plan
 
 ## Process Flow
 
@@ -63,7 +63,7 @@ digraph brainstorming {
 }
 ```
 
-**The terminal state is invoking writing-plans.** Do NOT invoke frontend-design, mcp-builder, or any other implementation skill. The ONLY skill you invoke after brainstorming is writing-plans.
+**The terminal state is invoking writing-plans.** Do NOT invoke frontend-design, mcp-builder, or any other implementation skill. After spec approval, you may optionally invoke grill-me to stress-test before writing-plans, but writing-plans is always the final step.
 
 ## The Process
 
@@ -155,7 +155,7 @@ After the spec review loop passes, ask the user to review the written spec befor
 **Implementation:**
 
 - Invoke the writing-plans skill to create a detailed implementation plan
-- Do NOT invoke any other skill. writing-plans is the next step.
+- Do NOT invoke any other skill except the optional grill-me above. writing-plans is always the final step.
 
 ## Key Principles
 

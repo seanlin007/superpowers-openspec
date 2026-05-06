@@ -118,39 +118,7 @@ Then: Cleanup worktree (Step 5)
 
 #### Option 2: Push and Create PR
 
-```bash
-# Push branch
-git push -u origin <feature-branch>
-
-# Create PR
-gh pr create --title "<title>" --body "$(cat <<'EOF'
-## Summary
-<2-3 bullets of what changed>
-
-## OpenSpec
-- [ ] No OpenSpec change (infrastructure / tooling only)
-- [ ] OpenSpec change archived: `<change-name>`
-
-## Migrations
-- [ ] No new migrations
-- [ ] New migrations included and reviewed
-
-## API Changes
-- [ ] No API changes
-- [ ] API changes are backwards-compatible
-- [ ] Breaking API changes — documented and coordinated
-
-## Kubernetes / Config Changes
-- [ ] No manifest or config changes
-- [ ] Changes to Helm values / K8s manifests included
-
-## Test Plan
-- [ ] `bash kubeops.sh test` passes
-- [ ] `pre-commit run --from-ref <base> --to-ref HEAD` clean
-- [ ] No missing migrations (models.py changed → migration file present in diff)
-EOF
-)"
-```
+Invoke `superpowers-openspec:deepflow-pr` — it handles upstream detection, quality gates, and PR creation with the standard checklist.
 
 Then: Cleanup worktree (Step 5)
 

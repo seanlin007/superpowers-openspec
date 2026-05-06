@@ -1,6 +1,6 @@
 ---
 name: hotfix
-description: Use when a bug needs an urgent fix that bypasses the normal brainstorm → plan → execute flow. Covers diagnosis, TDD fix, verification, and PR creation without full planning overhead.
+description: Use when a bug needs an urgent fix that bypasses the normal brainstorm → plan → execute flow — or when user says "hotfix", "urgent fix", "quick fix", "patch this now". Covers diagnosis, TDD fix, verification, and PR creation without full planning overhead.
 ---
 
 # Hotfix
